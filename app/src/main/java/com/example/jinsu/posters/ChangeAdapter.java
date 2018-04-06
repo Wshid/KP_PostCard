@@ -42,9 +42,13 @@ public class ChangeAdapter extends RecyclerView.Adapter<ChangeAdapter.ItemViewHo
         holder.image_icon.setImageDrawable(myItems.get(position).getCh_drawable());
         holder.check.setChecked(myItems.get(position).isCheked());
         holder.check.setTag(myItems.get(position));
-        if(holder.check.isChecked())
+        if(myItems.get(position).isCheked())
         {
             holder.linearLayout.setBackgroundColor(Color.parseColor("#BDBDBD"));
+        }
+        else
+        {
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
         }
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +65,7 @@ public class ChangeAdapter extends RecyclerView.Adapter<ChangeAdapter.ItemViewHo
 
                 items.setCheked(ch.isChecked());
                 myItems.get(position).setCheked(ch.isChecked());
+
                 if(ch.isChecked()) {
                     holder.linearLayout.setBackgroundColor(Color.parseColor("#BDBDBD"));
                 }

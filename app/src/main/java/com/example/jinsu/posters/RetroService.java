@@ -1,5 +1,7 @@
 package com.example.jinsu.posters;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -13,7 +15,10 @@ public interface RetroService {
     Call<Test2> getRespos(@Path("KEY") String id);
 
     @GET("/findAll")
-    Call<Test> get();
+    Call<List<Test>> get();
+
+    @POST("/registration")
+    Call<Test> post(@Body Test test);
 
     @GET("/users/{KEY}")
     Call<User> getUser(@Path("KEY") String key, @Path("id") String id);

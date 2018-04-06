@@ -22,6 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //Connect();
+        Connect();
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -107,27 +108,31 @@ public class HomeFragment extends Fragment {
                 getResources().getDrawable(R.drawable.outback)));
         home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.outback)));
+        home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
+                getResources().getDrawable(R.drawable.outback)));
         // 데이터 추가가 완료되었으면 notifyDataSetChanged() 메서드를 호출해 데이터 변경 체크를 실행합니다.
         adapter.notifyDataSetChanged();
     }
 
     public void Connect()
     {
-        connect = new RestClient<>();
-        retroService = connect.getClient(RetroService.class);
+       // connect = new RestClient<>();
+        //retroService = connect.getClient(RetroService.class);
 
-        /*retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com")
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://49.142.64.32:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        retroService = retrofit.create(RetroService.class);*/
+        retroService = retrofit.create(RetroService.class);
         getUser();
     }
     public void getUser()
     {
       //  Call<Test2> call = retroService.getRespos("meansoup");
-        Call<Test> call = retroService.get();
+       // Call<List<Test>> call = retroService.get();
+        Test t = new Test("멍윤","z");
+        Call<Test> call2 = retroService.post(t);
 
        /* call.enqueue(new Callback<Test2>() {
             @Override
@@ -148,24 +153,37 @@ public class HomeFragment extends Fragment {
             }
         });*/
 
-        call.enqueue(new Callback<Test>() {
+        /*call.enqueue(new Callback<List<Test>>() {
 
             @Override
-            public void onResponse(Call<Test> call, Response<Test> response) {
+            public void onResponse(Call<List<Test>> call, Response<List<Test>> response) {
                 Log.i("my_login","서버와의 통신 성공");
+                List<Test> data = response.body();
 
                 if(response.isSuccessful() && response.body() != null)
                 {
                     String str = ("ID : " +
-                            response.body()._id);
+                            data.get(1)._id);
                     Log.i("gotest",str);
 
                 }
             }
 
             @Override
-            public void onFailure(Call<Test> call, Throwable t) {
+            public void onFailure(Call<List<Test>> call, Throwable t) {
 
+                Log.e("my_login","서버와의 통신 실패 : "+t.getMessage());
+            }
+        });*/
+
+        call2.enqueue(new Callback<Test>() {
+            @Override
+            public void onResponse(Call<Test> call, Response<Test> response) {
+                Log.i("my_login","서버와의 통신 성공");
+            }
+
+            @Override
+            public void onFailure(Call<Test> call, Throwable t) {
                 Log.e("my_login","서버와의 통신 실패 : "+t.getMessage());
             }
         });

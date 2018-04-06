@@ -23,7 +23,7 @@
         <TextView
             android:text="사용 중 혜택"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:textSize="16sp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
@@ -33,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/btn_change"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_below="@id/image_card"
             android:layout_alignParentRight="true"
             android:onClick="@{home::onChangeButtonClick}"
@@ -41,13 +41,13 @@
             >
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:text="혜택 바꾸기"
                 android:textSize="16sp"
                 android:layout_weight="2"/>
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_arrow"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/btn_change"
+                    android:layout_marginTop="3dp"
                     />
 
 
