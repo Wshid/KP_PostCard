@@ -11,15 +11,18 @@
         android:layout_height="match_parent"
         android:background="#ffffff">
 
+
         <ImageView
             android:id="@+id/image_card"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:scaleType="fitXY"
             android:src="@drawable/card"
+            android:onClick="@{home::onImClick}"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"/>
+
         <TextView
             android:text="사용 중 혜택"
             android:layout_width="wrap_content"

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jinsu.posters">
-
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChangeActivity" />
+        <activity android:name=".ActivityScanner"/>
+        <activity android:name=".DesignActivity"/>
         <activity android:name=".PolicyActivity"></activity>
     </application>
 

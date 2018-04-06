@@ -107,13 +107,13 @@ public class ChangeActivity extends Activity {
         change_items.clear();
         // RecyclerView 에 들어갈 데이터를 추가합니다.
         change_items.add(new ChangeItem("우체국 택배","5% 할인(1만원 이상 결제 시)","월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post),true));
+                getResources().getDrawable(R.drawable.post2),true));
         change_items.add(new ChangeItem("GS25","10% 할인(5천원 이상 결제 시)","1일 1회 사용가능",
                 getResources().getDrawable(R.drawable.gs),true));
         change_items.add(new ChangeItem("애슐리","에이드 증정(2인 이상 식사 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.ashley),false));
+                getResources().getDrawable(R.drawable.ashley),true));
         change_items.add(new ChangeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.outback),false));
+                getResources().getDrawable(R.drawable.outback),true));
         change_items.add(new ChangeItem("CGV","35% 할인(1만원 이상 결제 시)","사용 제한 없음",
                 getResources().getDrawable(R.drawable.cgv),false));
         change_items.add(new ChangeItem("매드포갈릭","15% 할인(3만원 이상 결제 시)","월 3회 사용가능",
@@ -128,8 +128,8 @@ public class ChangeActivity extends Activity {
                 getResources().getDrawable(R.drawable.subway),false));
         change_items.add(new ChangeItem("투썸플레이스","15% 할인(1만원 이상 결제 시)","월 5회 사용가능",
                 getResources().getDrawable(R.drawable.twosome),false));
-        change_items.add(new ChangeItem("맥도날드","15% 할인(1만원 이상 결제 시)","월 3회 사용가능",
-                getResources().getDrawable(R.drawable.mcdonald),false));
+        change_items.add(new ChangeItem("KFC","10% 할인(1만원 이상 결제 시)","월 3회 사용가능",
+                getResources().getDrawable(R.drawable.kfc),false));
         change_items.add(new ChangeItem("피자헛","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.pizzahut),false));
         change_items.add(new ChangeItem("롯데월드","50% 할인(자유이용권 이용 시)","월 1회 사용가능",

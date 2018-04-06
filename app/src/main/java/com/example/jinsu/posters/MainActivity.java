@@ -1,9 +1,13 @@
 package com.example.jinsu.posters;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -16,19 +20,46 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navi;
     private TextView mTextMessage;
     private ViewPager page;
+    private PageAdapter adapter;
 
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
+//접근 거절 상태일 경우
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            //사용자가 이전에 거절한 이력이 있는 경우
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.CAMERA)) {
+
+            }
+            //사용자가 다시 보지 않기에 체크하고 거절한 이력이 있는 경우
+            else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        0);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setMain(this);
         mTextMessage = (TextView) findViewById(R.id.message);
 
-        binding.page.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        adapter = new PageAdapter(getSupportFragmentManager());
+
+        //binding.page.setAdapter(new PageAdapter(getSupportFragmentManager()));
+        binding.page.setAdapter(adapter);
+        binding.page.setOffscreenPageLimit(1);
         binding.page.setCurrentItem(0);
 
         binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

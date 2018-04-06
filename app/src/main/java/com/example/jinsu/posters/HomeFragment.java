@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Connect();
+        //Connect();
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -74,6 +74,11 @@ public class HomeFragment extends Fragment {
         startActivity(new Intent(super.getContext(), ChangeActivity.class));
     }
 
+    public void onImClick(View v)
+    {
+        startActivity(new Intent(super.getContext(), DesignActivity.class));
+    }
+
 
     //RecyclerView 넣기
     public void setRecyclerView()
@@ -96,20 +101,17 @@ public class HomeFragment extends Fragment {
     {
         home_items.clear();
         // RecyclerView 에 들어갈 데이터를 추가합니다.
+        home_items.add(new HomeItem("우체국 택배","5% 할인(1만원 이상 결제 시)","월 3회 사용가능",
+                getResources().getDrawable(R.drawable.post2)));
         home_items.add(new HomeItem("GS25","10% 할인(5천원 이상 결제 시)","1일 1회 사용가능",
                 getResources().getDrawable(R.drawable.gs)));
         home_items.add(new HomeItem("애슐리","에이드 증정(2인 이상 식사 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.ashley)));
         home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.outback)));
-        home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.outback)));
-        home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.outback)));
-        home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.outback)));
-        home_items.add(new HomeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.outback)));
+        home_items.add(new HomeItem("스타벅스","20% 할인(1만원 이상 결제 시)","1일 1회 사용가능",
+                getResources().getDrawable(R.drawable.starbucks)));
+
         // 데이터 추가가 완료되었으면 notifyDataSetChanged() 메서드를 호출해 데이터 변경 체크를 실행합니다.
         adapter.notifyDataSetChanged();
     }

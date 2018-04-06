@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        card:cardCornerRadius="5dp">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:card="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:weightSum="1">
+        <TextView
+            android:id="@+id/charttitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이달 총 혜택 사용순위"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:background="@color/homeColor"
+            />
+        <TextView
+            android:id="@+id/charthint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:textColor="#000000"
+            android:text="   > 포스트카드를 통해 고객님이 이번 달 받은 혜택목록입니다."
+            android:gravity="start"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <com.github.mikephil.charting.charts.PieChart xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/piechart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:background="#ffffff" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:weightSum="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/im1"
+                        android:src="@drawable/one"
+                        android:layout_width="25dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:background="#ffffff"
+                        android:id="@+id/chart1a1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:text="롯데리아 20000원"
+                        android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/im2"
+                        android:src="@drawable/two"
+                        android:layout_width="25dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:background="#ffffff"
+                        android:id="@+id/chart1a2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:text="스타벅스 18000원"
+                        android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/im3"
+                        android:layout_width="25dp"
+                        android:src="@drawable/three"
+                        android:gravity="center"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:background="#ffffff"
+                        android:id="@+id/chart1a3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:text="GS25 14000원"
+                        android:gravity="center" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

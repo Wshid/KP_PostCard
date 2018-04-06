@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        card:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:background="#ffffff"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="오늘 점심 후에 스타벅스 어떠세요?"
+                android:textColor="#000000"
+                android:gravity="start"
+                android:textSize="15dp" />
+
+                <ImageView
+                    android:background="#ffffff"
+                    android:id="@+id/imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp" />
+
+
+            <TextView
+                android:id="@+id/textview"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:gravity="center|left"
+                android:layout_marginLeft="7dp"
+                android:text="이번달 지출 10,000원" />
+
+                    <TextView
+                        android:background="#ffffff"
+                        android:id="@+id/textview2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:gravity="center|left"
+                        android:layout_marginLeft="7dp"
+                        android:text="1만원이상 결제 시 10% 할인"
+                        android:textColor="#ff0000" />
+            <TextView
+                android:id="@+id/btn_change_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="15dp"
+                android:background="@color/homeColor"
+                android:gravity="center|right"
+                android:text=" 자세한 혜택 확인하기  >> " />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
+

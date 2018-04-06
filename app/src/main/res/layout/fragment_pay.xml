@@ -1,9 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="pay fragment" />
-</android.support.constraint.ConstraintLayout>
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center_vertical"
+        android:text="금액" />
+
+    <EditText
+        android:id="@+id/send_money"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="right"
+        android:layout_toRightOf="@id/money"
+        android:layout_marginLeft="50dp"
+        android:layout_alignTop="@id/money"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/won"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/send_money"
+        android:layout_toRightOf="@+id/send_money"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:text="원" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_below="@+id/send_money"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        />
+    <EditText
+        android:id="@+id/account"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/won"
+        android:layout_toRightOf="@+id/spinner"
+        android:layout_alignBottom="@id/spinner"
+        android:ems="10"
+        android:hint="계좌번호"
+        android:inputType="numberSigned"
+        android:digits="0123456789-"
+        android:layout_marginLeft="10dp"/>
+
+    <Button
+        android:id="@+id/recent_account_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_border"
+        android:text="최근사용 계좌" />
+
+    <Button
+        android:id="@+id/use_account_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/recent_account_button"
+        android:layout_alignBottom="@id/recent_account_button"
+        android:layout_below="@id/account"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_border"
+        android:text="자주쓰는 계좌" />
+
+    <TextView
+        android:id="@+id/send_text"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/recent_account_button"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="50dp"
+        android:text="보내는 사람" />
+
+
+    <EditText
+        android:id="@+id/send_edittext"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/send_text"
+        android:layout_alignBottom="@id/send_text"
+        android:layout_below="@id/use_account_button"
+        android:inputType="textPersonName"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="60dp"
+        />
+
+    <TextView
+        android:id="@+id/show"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/send_text"
+        android:text="통장 표시 내용"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="50dp"/>
+
+    <EditText
+        android:id="@+id/show_edittext"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/show"
+        android:layout_alignLeft="@id/send_edittext"
+        android:layout_toRightOf="@id/show"
+        android:layout_below="@id/send_edittext"
+        android:inputType="textPersonName"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/send_button"
+        android:layout_below="@id/show"
+        android:text="취소"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_border"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        />
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_edittext"
+        android:layout_toRightOf="@id/cancel"
+        android:layout_alignRight="@id/use_account_button"
+        android:text="송금"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_border"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="50dp"
+        />
+
+</RelativeLayout>
