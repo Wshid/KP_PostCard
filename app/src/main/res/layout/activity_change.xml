@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="change"
+            type="com.example.jinsu.posters.ChangeActivity"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/homeColor"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="정책 보기"
+            android:textSize="16sp"
+            android:background="@drawable/btn_border2"
+            android:onClick="@{change::onPolicyClick}"
+            android:layout_gravity="right"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/change_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="61dp"
+                android:layout_height="61dp"
+                android:background="@drawable/btn_circle"
+                android:textSize="20sp"
+                android:text="확인"
+                android:textColor="@color/white"
+                android:onClick="@{change::onBtnChClick}"
+                android:layout_gravity="bottom|right|center_horizontal"
+                />
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

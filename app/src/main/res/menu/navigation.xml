@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navi_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navi_send"
+        android:icon="@drawable/ic_send"
+        android:enabled="true"
+        android:title="송금" />
+
+    <item
+        android:id="@+id/navi_barcode"
+        android:icon="@drawable/ic_barcode"
+        android:enabled="true"
+        android:title="결제"
+         />
+    <item
+        android:id="@+id/navi_bonus"
+        android:icon="@drawable/ic_bonus"
+        android:enabled="true"
+        android:title="My\n혜택" />
+    <item
+        android:id="@+id/navi_list"
+        android:enabled="true"
+        android:icon="@drawable/pay"
+        android:title="결제내역" />
+
+</menu>
