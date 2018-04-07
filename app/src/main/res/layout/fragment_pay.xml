@@ -1,29 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
     <TextView
+        android:id="@+id/bank_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="내 우체국 금융통장" />
+
+    <TextView
+        android:id="@+id/account_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bank_book"
+        android:layout_alignLeft="@id/bank_book"
+        android:text="123-456-78907" />
+
+    <TextView
+        android:id="@+id/possible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_number"
+        android:layout_toLeftOf="@id/possible_money"
+        android:layout_alignBottom="@id/won1"
+        android:layout_marginTop="10dp"
+        android:text="출금가능금액" />
+
+    <TextView
+        android:id="@+id/possible_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_number"
+        android:layout_toLeftOf="@+id/won1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/won1"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="5,000,000" />
+
+    <TextView
+        android:id="@+id/won1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_number"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="원" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="92dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
         android:id="@+id/money"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="25dp"
+        android:layout_below="@id/possible"
         android:gravity="center_vertical"
         android:text="금액" />
 
     <EditText
         android:id="@+id/send_money"
-        android:layout_width="164dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="right"
-        android:layout_toRightOf="@id/money"
-        android:layout_marginLeft="50dp"
         android:layout_alignTop="@id/money"
+        android:layout_marginLeft="60dp"
+        android:layout_toRightOf="@id/money"
+        android:ems="10"
+        android:hint="보내는 금액 입력"
+        android:gravity="right"
         android:inputType="numberDecimal" />
 
     <TextView
@@ -41,19 +103,20 @@
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_below="@+id/send_money"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        />
+        android:layout_alignLeft="@id/money"
+        android:layout_marginTop="25dp"        />
     <EditText
         android:id="@+id/account"
         android:layout_width="189dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/won"
         android:layout_toRightOf="@+id/spinner"
         android:layout_alignBottom="@id/spinner"
+        android:layout_alignRight="@id/won"
         android:ems="10"
-        android:hint="계좌번호"
+        android:hint="계좌번호 입력"
+        android:gravity="center"
         android:inputType="numberSigned"
         android:digits="0123456789-"
         android:layout_marginLeft="10dp"/>
@@ -63,11 +126,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:textSize="15sp"
-        android:textColor="@color/white"
+        android:layout_alignLeft="@id/money"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_border"
+        android:textColor="@color/white"
         android:text="최근사용 계좌" />
 
     <Button
@@ -76,12 +138,12 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/recent_account_button"
         android:layout_alignBottom="@id/recent_account_button"
+        android:layout_alignRight="@id/won"
         android:layout_below="@id/account"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        android:textSize="15sp"
-        android:textColor="@color/white"
         android:background="@drawable/btn_border"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="50dp"
         android:text="자주쓰는 계좌" />
 
     <TextView
@@ -90,8 +152,8 @@
         android:layout_height="45dp"
         android:gravity="center_vertical"
         android:layout_below="@id/recent_account_button"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_alignLeft="@id/money"
         android:text="보내는 사람" />
 
 
@@ -101,22 +163,24 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/send_text"
         android:layout_alignBottom="@id/send_text"
+        android:layout_alignRight="@id/won"
         android:layout_below="@id/use_account_button"
         android:inputType="textPersonName"
         android:gravity="center"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="60dp"
+        android:hint="7자이내 입력"
         />
 
     <TextView
         android:id="@+id/show"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="25dp"
         android:gravity="center_vertical"
         android:layout_below="@id/send_text"
         android:text="통장 표시 내용"
-        android:layout_marginTop="45dp"
-        android:layout_marginLeft="50dp"/>
+        android:layout_alignLeft="@id/money"
+        android:layout_marginTop="45dp" />
 
     <EditText
         android:id="@+id/show_edittext"
@@ -124,11 +188,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/show"
         android:layout_alignLeft="@id/send_edittext"
+        android:layout_alignRight="@id/won"
         android:layout_toRightOf="@id/show"
         android:layout_below="@id/send_edittext"
         android:inputType="textPersonName"
         android:gravity="center"
         android:layout_marginTop="25dp"
+        android:hint="7자이내 입력"
         />
 
     <Button
@@ -136,13 +202,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/send_button"
+        android:layout_alignLeft="@id/money"
         android:layout_below="@id/show"
         android:text="취소"
-        android:textSize="15sp"
-        android:textColor="@color/white"
         android:background="@drawable/btn_border"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="25dp"
         />
     <Button
         android:id="@+id/send_button"
@@ -150,13 +215,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/show_edittext"
         android:layout_toRightOf="@id/cancel"
-        android:layout_alignRight="@id/use_account_button"
+        android:layout_alignRight="@id/won"
         android:text="송금"
-        android:textSize="15sp"
-        android:textColor="@color/white"
         android:background="@drawable/btn_border"
+        android:textColor="@color/white"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         />
+
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="230dp"
+        android:background="?android:attr/listDivider"
+        />
+
 
 </RelativeLayout>

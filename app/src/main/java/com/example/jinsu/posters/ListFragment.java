@@ -1,155 +1,85 @@
 package com.example.jinsu.posters;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.jinsu.posters.databinding.FragmentListBinding;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Created by jinsu on 2018-03-25.
  */
 
 public class ListFragment extends Fragment {
+    private FragmentListBinding binding;
+    private RecyclerView.Adapter adapter;
+    private ArrayList<Listitem> myList;
+
     public ListFragment()
     {
 
     }
-    private LinearLayout list;
-    private RelativeLayout relative;
-    TextView total_money;
-    Date today;
-    View v;
-    ViewGroup vg;
-    set_list sl;
-    String example = "[{'card_key' : '123456', 'list_place':'학식','list_cost':3000,'list_date':'2018-03-01'}," +
-            "{'card_key' : '123456', 'list_place':'청운','list_cost':6000,'list_date':'2017-11-02'}," +
-            "{'card_key' : '123456', 'list_place':'도스마스','list_cost':2500,'list_date':'2017-08-03'}," +
-            "{'card_key' : '123456', 'list_place':'설쌈','list_cost':6500,'list_date':'2018-04-04'}]";
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        vg = container;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //날짜 포맷설정
-        SimpleDateFormat change_dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일"); //날짜 포맷설정
-        long now = System.currentTimeMillis();
-        today= new Date(now);
-        DecimalFormat fm = new DecimalFormat("###,###");
-        int total = 0;
-        v = inflater.inflate(R.layout.fragment_list,container,false); //findbyid쓰기위해
-        total_money = (TextView) v.findViewById(R.id.total_money);
-        Button month_one = (Button) v.findViewById(R.id.month_one); //1개월
-        Button month_three = (Button) v.findViewById(R.id.month_three); //3개월
-        Button month_six = (Button)v.findViewById(R.id.month_six); //6개월
-        Button month_self = (Button) v.findViewById(R.id.month_self); //직접설정
-        sl=new set_list(0);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_list,container,false);
+        myList = new ArrayList<>();
+        //이미지뷰 둥글게 하기
 
-        month_one.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view){
-                sl=new set_list(1);
-            }
-        });
-        month_three.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view){
+        binding.setList(this);
 
-                sl=new set_list(3);
-            }
-        });
-        month_six.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view){
-                sl=new set_list(6);
+        setRecyclerView();
+        return binding.getRoot();
 
-            }
-        });
-        month_self.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view){
-
-            }
-        });
-
-        return v;
     }
-    public class set_list{
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //날짜 포맷설정
-        SimpleDateFormat change_dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일"); //날짜 포맷설정
-        long now = System.currentTimeMillis();
-        Date today = new Date(now);
-        DecimalFormat fm = new DecimalFormat("###,###");
-        int total = 0;
-        public set_list(int month_point){
-            try {
-                total=0;
-                int count=0;
-                JSONArray jarray = new JSONArray(example);   // JSONArray 생성
-                list = (LinearLayout)v.findViewById(R.id.list_linearlayout); //결제내역뜨는 list
-                list.removeAllViews();
-                for (int i = 0; i < jarray.length(); i++) {
-                    RelativeLayout use_layout = new RelativeLayout(getActivity());//결제내역 내 레이아웃
-                    use_layout.setMinimumHeight(300);
-                    use_layout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)); //레이아웃 크기
-                    TextView use_place = new TextView(getActivity()); //결제장소 textview
-                    TextView use_cost = new TextView(getActivity()); //결제비용 textview
-                    TextView use_date = new TextView(getActivity()); //결제날짜 textview
 
+    public void setRecyclerView()
+    {
+        // 각 Item 들이 RecyclerView 의 전체 크기를 변경하지 않는 다면
+        // setHasFixedSize() 함수를 사용해서 성능을 개선할 수 있습니다.
+        // 변경될 가능성이 있다면 false 로 , 없다면 true를 설정해주세요.
+        binding.listRecycle.setHasFixedSize(true);
 
+        // RecyclerView에 Adapter를 설정해줍니다.
+        adapter = new ListAdapter(myList);
+        binding.listRecycle.setAdapter(adapter);
 
-                    RelativeLayout.LayoutParams date_params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    date_params.addRule(RelativeLayout.ALIGN_PARENT_LEFT,RelativeLayout.CENTER_VERTICAL);
-                    use_place.setLayoutParams(date_params);
+        //가로 또는 세로 스크롤 목록 형식
+        binding.listRecycle.setLayoutManager(new LinearLayoutManager(super.getContext()));
+        setData();
 
-                    RelativeLayout.LayoutParams place_params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    place_params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,RelativeLayout.ALIGN_PARENT_TOP);
-                    place_params.addRule(RelativeLayout.ABOVE,use_cost.getId());
-                    place_params.addRule(RelativeLayout.RIGHT_OF,use_date.getId());
-                    use_place.setLayoutParams(place_params);
+    }
 
-                    RelativeLayout.LayoutParams cost_params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    cost_params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,RelativeLayout.ALIGN_PARENT_BOTTOM);
-                    cost_params.addRule(RelativeLayout.BELOW,use_place.getId());
-                    cost_params.addRule(RelativeLayout.RIGHT_OF,use_date.getId());
-                    cost_params.setMargins(0,100,0,0);
-                    use_cost.setLayoutParams(cost_params);
+    public void oneClick(View v)
+    {
 
-                    JSONObject jObject = jarray.getJSONObject(i);  // JSONObject 추출
-                    Date list_date = dateFormat.parse(jObject.getString("list_date"));
+    }
+    public void threeClick(View v)
+    {
 
-                    if(month_point != 0 && (today.getTime() - list_date.getTime())/(1000*60*60*24)>=month_point*30)
-                        continue;
-                    use_layout.addView(use_date);   //layout에 각 항목 추가
-                    use_layout.addView(use_cost);
-                    use_layout.addView(use_place);
-                    list.addView(use_layout);   // linear layout에 relative layout추가
+    }
+    public void sixClick(View v)
+    {
 
-                    String card_key = jObject.getString("card_key");
-                    String list_place = jObject.getString("list_place");
-                    int list_cost = jObject.getInt("list_cost");
-                    use_place.setText(list_place); //결제내역에 뜰 String
-                    use_cost.setText(""+list_cost);
-                    use_date.setText(change_dateFormat.format(list_date));
-                    total+=list_cost;
-                }
-
-                total_money.setText(fm.format(total));
-            }
-            catch(JSONException e){
-                e.printStackTrace();
-            }
-            catch(ParseException e){
-                e.printStackTrace();
-            }
-        }
+    }
+    public void setData()
+    {
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",true));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        adapter.notifyDataSetChanged();
     }
 }

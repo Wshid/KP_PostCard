@@ -22,4 +22,10 @@ public class ActivityScanner extends CaptureActivity {
        // barcode_scan_title_view title_view = new barcode_scan_title_view(this);
         //this.addContentView(title_view, layoutParams);
     }
+
+    /*@Override
+    public void onBackPressed()
+    {
+        moveTaskToBack(true);
+    }*/
 }

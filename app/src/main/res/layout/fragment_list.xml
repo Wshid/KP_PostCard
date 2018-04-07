@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+        <variable
+            name="list"
+            type="com.example.jinsu.posters.ListFragment"/>
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UseList">
+    >
 
 
     <LinearLayout
@@ -14,8 +20,12 @@
         <TextView
             android:id="@+id/total_money"
             android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="59,600 원"
+            android:layout_margin="4dp"
+            android:textStyle="bold"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +36,12 @@
                 android:id="@+id/month_one"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:onClick="@{list::oneClick}"
                 android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_marginRight="2dp"
                 android:text="1개월" />
 
             <Button
@@ -34,6 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:onClick="@{list::threeClick}"
+                android:layout_marginRight="2dp"
                 android:text="3개월" />
 
             <Button
@@ -41,6 +61,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="@{list::sixClick}"
+                android:background="@drawable/btn_border"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_marginRight="2dp"
                 android:text="6개월" />
 
             <Button
@@ -48,24 +73,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/btn_border"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_marginRight="2dp"
                 android:text="직접입력" />
         </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/list_scroll"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_recycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/list_linearlayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:addStatesFromChildren="true"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-        </ScrollView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            />
 
     </LinearLayout>
 </FrameLayout>
+</layout>

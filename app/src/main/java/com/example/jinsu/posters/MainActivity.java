@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         //binding.page.setAdapter(new PageAdapter(getSupportFragmentManager()));
         binding.page.setAdapter(adapter);
-        binding.page.setOffscreenPageLimit(1);
+
         binding.page.setCurrentItem(0);
 
         binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
