@@ -1,0 +1,22 @@
+{
+  "name": "Post",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "ejs": "^2.5.8",
+    "express": "4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.11",
+    "mysql": "2.15.0"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
