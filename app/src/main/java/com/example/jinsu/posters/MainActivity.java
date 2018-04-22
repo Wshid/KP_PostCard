@@ -1,6 +1,7 @@
 package com.example.jinsu.posters;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.jinsu.posters.Model.MyUser;
 import com.example.jinsu.posters.databinding.ActivityMainBinding;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -28,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-
-//접근 거절 상태일 경우
+        initUser();
+        //권한 획득
+        //접근 거절 상태일 경우
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //binding.page.setAdapter(new PageAdapter(getSupportFragmentManager()));
         binding.page.setAdapter(adapter);
 
-        binding.page.setCurrentItem(0);
+//        binding.page.setCurrentItem(0);
 
         binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+
                 switch (position)
                 {
                     case 0:
@@ -124,5 +129,20 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationViewHelper.disableShiftMode(binding.navigation);
     }
+
+    public void initUser()
+    {
+        MyUser user = new MyUser("24",1,2,3);
+        SharedPreferences mPref = getSharedPreferences("user",MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = mPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        prefEditor.putString("User",json);
+        prefEditor.commit();
+    }
+
+
+
+
 
 }

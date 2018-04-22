@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jinsu.posters.Data.RestClient;
+import com.example.jinsu.posters.Data.RetroService;
+import com.example.jinsu.posters.Model.Test;
 import com.example.jinsu.posters.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -102,7 +104,7 @@ public class HomeFragment extends Fragment {
         home_items.clear();
         // RecyclerView 에 들어갈 데이터를 추가합니다.
         home_items.add(new HomeItem("우체국 택배","5% 할인(1만원 이상 결제 시)","월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post2)));
+                getResources().getDrawable(R.drawable.post)));
         home_items.add(new HomeItem("GS25","10% 할인(5천원 이상 결제 시)","1일 1회 사용가능",
                 getResources().getDrawable(R.drawable.gs)));
         home_items.add(new HomeItem("애슐리","에이드 증정(2인 이상 식사 시)","월 1회 사용가능",
@@ -118,15 +120,15 @@ public class HomeFragment extends Fragment {
 
     public void Connect()
     {
-       // connect = new RestClient<>();
-        //retroService = connect.getClient(RetroService.class);
+        connect = new RestClient<>();
+        retroService = connect.getClient(RetroService.class);
 
-        retrofit = new Retrofit.Builder()
+        /*retrofit = new Retrofit.Builder()
                 .baseUrl("http://49.142.64.32:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        retroService = retrofit.create(RetroService.class);
+        retroService = retrofit.create(RetroService.class);*/
         getUser();
     }
     public void getUser()

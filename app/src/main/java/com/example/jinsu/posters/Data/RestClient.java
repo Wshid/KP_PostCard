@@ -1,4 +1,4 @@
-package com.example.jinsu.posters;
+package com.example.jinsu.posters.Data;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

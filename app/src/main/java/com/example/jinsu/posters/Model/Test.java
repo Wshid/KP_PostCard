@@ -1,4 +1,4 @@
-package com.example.jinsu.posters;
+package com.example.jinsu.posters.Model;
 
 public class Test {
     String _id;

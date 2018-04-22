@@ -12,14 +12,16 @@ public class ChangeItem {
     private String ch_txt_detail2;
     private Drawable ch_drawable;
     private boolean isCheked;
+    private String gift_key;
 
-    public ChangeItem(String name, String detail1, String detail2, Drawable drawable, boolean isCheked)
+    public ChangeItem(String name, String detail1, String detail2, Drawable drawable, boolean isCheked, String gift_key)
     {
         this.ch_txt_name=name;
         this.ch_txt_detail=detail1;
         this.ch_txt_detail2=detail2;
         this.ch_drawable=drawable;
         this.isCheked=isCheked;
+        this.gift_key=gift_key;
     }
     public void setCh_txt_name(String ch_txt_name) {
         this.ch_txt_name = ch_txt_name;
@@ -31,6 +33,10 @@ public class ChangeItem {
 
     public void setCh_txt_detail2(String ch_txt_detail2) {
         this.ch_txt_detail2 = ch_txt_detail2;
+    }
+
+    public String getGift_key() {
+        return gift_key;
     }
 
     public void setCh_drawable(Drawable ch_drawable) {

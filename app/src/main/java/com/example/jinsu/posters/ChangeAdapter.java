@@ -23,6 +23,8 @@ public class ChangeAdapter extends RecyclerView.Adapter<ChangeAdapter.ItemViewHo
     {
         myItems = items;
     }
+    ArrayList<String> plus_gift = new ArrayList<>();
+    ArrayList<String> minus_gift = new ArrayList<>();
 
     //새로운 뷰 홀더 생성
     @Override

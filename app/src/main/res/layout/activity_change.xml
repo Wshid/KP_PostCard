@@ -4,7 +4,7 @@
     <data>
         <variable
             name="change"
-            type="com.example.jinsu.posters.ChangeActivity"/>
+            type="com.example.jinsu.posters.ViewModel.ChangeViewModel"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

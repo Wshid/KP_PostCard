@@ -1,5 +1,11 @@
-package com.example.jinsu.posters;
+package com.example.jinsu.posters.Data;
 
+import com.example.jinsu.posters.Model.Gift;
+import com.example.jinsu.posters.Model.User;
+import com.example.jinsu.posters.Model.Test;
+import com.example.jinsu.posters.Model.Test2;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,6 +19,9 @@ public interface RetroService {
     //baseUrl뒤에 붙음 , Path가 url뒤에 붙음
     @GET("/users/{KEY}")
     Call<Test2> getRespos(@Path("KEY") String id);
+
+    @GET("/All_Gift")
+    Call<ArrayList<Gift>> getGift();
 
     @GET("/findAll")
     Call<List<Test>> get();
