@@ -1,6 +1,8 @@
 package com.example.jinsu.posters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -36,15 +38,17 @@ public class ChangeActivity extends Activity {
     private RestClient<RetroService> connect;
     private MyUser user;
     private ArrayList<Gift> total_gift;
+   // private ChangeViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //viewModel = new ChangeViewModel(this);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_change);
         binding.setChange(this);
-        getUser();
-        Connect();
-       // initData();
+        //getUser();
+        //Connect();
+        //initData();
         setRecyclerView();
 
         binding.changeRecycle.setOnTouchListener(new View.OnTouchListener() {
@@ -64,6 +68,25 @@ public class ChangeActivity extends Activity {
         });
     }
 
+
+   /* //RecyclerView 넣기
+    public void setRecyclerView()
+    {
+        // 각 Item 들이 RecyclerView 의 전체 크기를 변경하지 않는 다면
+        // setHasFixedSize() 함수를 사용해서 성능을 개선할 수 있습니다.
+        // 변경될 가능성이 있다면 false 로 , 없다면 true를 설정해주세요.
+        binding.changeRecycle.setHasFixedSize(true);
+
+        // RecyclerView에 Adapter를 설정해줍니다.
+        adapter = new ChangeAdapter(viewModel.getChange_items());
+        binding.changeRecycle.setAdapter(adapter);
+
+        //가로 또는 세로 스크롤 목록 형식
+        binding.changeRecycle.setLayoutManager(new LinearLayoutManager(this));
+
+    }*/
+
+   //내부DB에서 user데이터 불러오기
     private void getUser()
     {
 
@@ -71,7 +94,6 @@ public class ChangeActivity extends Activity {
         Gson gson = new Gson();
         String json = mPrefs.getString("User","");
         user = gson.fromJson(json,MyUser.class);
-        Log.d("my_change",user.getCard_key());
     }
 
     public void initData()
@@ -103,13 +125,12 @@ public class ChangeActivity extends Activity {
 
     public void onPolicyClick(View v)
     {
-        startActivity(new Intent(ChangeActivity.super.getBaseContext(), PolicyActivity.class));
+        startActivity(new Intent(this, PolicyActivity.class));
     }
 
     public void onBtnChClick(View v)
     {
         int cnt=0;
-
 
         for(ChangeItem changeItem : change_items)
         {
@@ -120,32 +141,34 @@ public class ChangeActivity extends Activity {
                 {
                     case 1:
                     {
-                        user.chGift_1(Integer.parseInt(changeItem.getGift_key()));
+                        user.chGift_1(changeItem.getGift_key());
                         break;
                     }
                     case 2:
                     {
-                        user.chGift_2(Integer.parseInt(changeItem.getGift_key()));
+                        user.chGift_2(changeItem.getGift_key());
                         break;
                     }
                     case 3:
                     {
-                        user.chGift_3(Integer.parseInt(changeItem.getGift_key()));
+                        user.chGift_3(changeItem.getGift_key());
+                        break;
+                    }
+                    case 4:
+                    {
+                        user.chGift_4(changeItem.getGift_key());
+                        break;
+                    }
+                    case 5:
+                    {
+                        user.chGift_5(changeItem.getGift_key());
                         break;
                     }
                 }
             }
         }
-        SharedPreferences mPrefs = getSharedPreferences("user",MODE_PRIVATE);
-        Gson gson = new Gson();
-
-        SharedPreferences.Editor prefEditor = mPrefs.edit();
-        String json = gson.toJson(user);
-        prefEditor.putString("User",json);
-        prefEditor.commit();
-
-
-        /*if(true)
+        //5개보다 많이 한 경우
+        if(cnt > 5)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage("불가능 합니다. 혜택 정책을 보고 오세요")
@@ -166,8 +189,18 @@ public class ChangeActivity extends Activity {
         }
         else
         {
+            SharedPreferences mPrefs = getSharedPreferences("user",MODE_PRIVATE);
+            Gson gson = new Gson();
 
-        }*/
+            SharedPreferences.Editor prefEditor = mPrefs.edit();
+            String json = gson.toJson(user);
+            prefEditor.putString("User",json);
+            prefEditor.commit();
+            startActivity(new Intent(this, MainActivity.class));
+            onDestroy();
+        }
+
+
     }
 
     //RecyclerView 넣기
@@ -193,44 +226,43 @@ public class ChangeActivity extends Activity {
         change_items.clear();
         // RecyclerView 에 들어갈 데이터를 추가합니다.
 
-        /*hange_items.add(new ChangeItem(total_gift.get(user.getGift_1()).getGift_title(),
-                total_gift.get(user.getGift_1()).getGift_content(),
-                "월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post),
-                true,
-                Integer.toString(user.getGift_1())));
-        change_items.add(new ChangeItem(total_gift.get(user.getGift_2()).getGift_title(),
-                total_gift.get(user.getGift_2()).getGift_content(),
-                "월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post),
-                true,
-                Integer.toString(user.getGift_2())));
-        change_items.add(new ChangeItem(total_gift.get(user.getGift_3()).getGift_title(),
-                total_gift.get(user.getGift_3()).getGift_content(),
-                "월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post),
-                true,
-                Integer.toString(user.getGift_3())));
+       /* for(Gift gift : total_gift)
+        {
+            String key = gift.getGitt_idx();
+            if(key.equals(user.getGift_1()) || key.equals(user.getGift_2()) || key.equals(user.getGift_3())
+                    || key.equals(user.getGift_4()) || key.equals(user.getGift_5()))
+            {
+                change_items.add(new ChangeItem(gift.getGift_title(),
+                        gift.getGift_content(),
+                        gift.getGift_limit(),
+                        getResources().getIdentifier(gift.getGift_image(),"drawable",getPackageName()),
+                        false,
+                        gift.getGitt_idx()
+                ));
+
+            }
+        }
 
         for(Gift gift : total_gift)
         {
-            int key = Integer.parseInt(gift.getGitt_idx());
-            if(key != user.getGift_1() && key != user.getGift_2() && key != user.getGift_3())
+            String key = gift.getGitt_idx();
+            if(!key.equals(user.getGift_1()) && !key.equals(user.getGift_2()) && !key.equals(user.getGift_3())
+                    && !key.equals(user.getGift_4()) && !key.equals(user.getGift_5()))
             {
                 change_items.add(new ChangeItem(gift.getGift_title(),
-                                gift.getGift_content(),
-                                " 월 3회 사용가능",
-                                getResources().getDrawable(R.drawable.post),
-                                false,
-                                gift.getGitt_idx()
-                                ));
+                        gift.getGift_content(),
+                        gift.getGift_limit(),
+                        getResources().getIdentifier(gift.getGift_image(),"drawable",getPackageName()),
+                        false,
+                        gift.getGitt_idx()
+                ));
 
             }
         }*/
         change_items.add(new ChangeItem("우체국 택배","5% 할인(1만원 이상 결제 시)","월 3회 사용가능",
-                getResources().getDrawable(R.drawable.post),true,""));
-        change_items.add(new ChangeItem("GS25","10% 할인(5천원 이상 결제 시)","1일 1회 사용가능",
-                getResources().getDrawable(R.drawable.gs),true,""));
+                getResources().getIdentifier("post","drawable",getPackageName()),true,""));
+        /*change_items.add(new ChangeItem("GS25","10% 할인(5천원 이상 결제 시)","1일 1회 사용가능",
+                getResources(R.drawable.gs),true,""));
         change_items.add(new ChangeItem("애슐리","에이드 증정(2인 이상 식사 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.ashley),true,""));
         change_items.add(new ChangeItem("아웃백","30% 할인(3만원 이상 결제 시)","월 1회 사용가능",
@@ -258,7 +290,8 @@ public class ChangeActivity extends Activity {
         change_items.add(new ChangeItem("인터파크 쇼핑","10% 할인(5만원 이상 결제 시)","월 1회 사용가능",
                 getResources().getDrawable(R.drawable.interpark),false,""));
         change_items.add(new ChangeItem("Sum Cafe","10% 할인(3만원 이상 결제 시)","월 1회 사용가능",
-                getResources().getDrawable(R.drawable.sm),false,""));
+                getResources().getDrawable(R.drawable.sm),false,""));*/
+
         // 데이터 추가가 완료되었으면 notifyDataSetChanged() 메서드를 호출해 데이터 변경 체크를 실행합니다.
 
         adapter.notifyDataSetChanged();

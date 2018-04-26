@@ -23,14 +23,17 @@ public interface RetroService {
     @GET("/All_Gift")
     Call<ArrayList<Gift>> getGift();
 
+    @GET("/user")
+    Call<User> getUser();
+
     @GET("/findAll")
     Call<List<Test>> get();
 
     @POST("/registration")
     Call<Test> post(@Body Test test);
 
-    @GET("/users/{KEY}")
-    Call<User> getUser(@Path("KEY") String key, @Path("id") String id);
+    /*@GET("/users/{KEY}")
+    Call<User> getUser(@Path("KEY") String key, @Path("id") String id);*/
 
     @POST("/users/{KEY}")
     Call<User> postRespos(@Path("KEY") String id, @Body User user);

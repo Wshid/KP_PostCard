@@ -1,7 +1,9 @@
 package com.example.jinsu.posters;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -16,25 +18,26 @@ import android.view.ViewGroup;
 
 import com.example.jinsu.posters.Data.RestClient;
 import com.example.jinsu.posters.Data.RetroService;
-import com.example.jinsu.posters.Model.Test;
+import com.example.jinsu.posters.Model.MyUser;
+import com.example.jinsu.posters.Model.User;
 import com.example.jinsu.posters.databinding.FragmentHomeBinding;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class HomeFragment extends Fragment {
 
-    private Retrofit retrofit;
     private RetroService retroService;
     private RestClient<RetroService> connect;
     private FragmentHomeBinding binding;
     private GradientDrawable drawable;
     private RecyclerView.Adapter adapter;
     private ArrayList<HomeItem> home_items = new ArrayList<>();
+    private MyUser user;
     public HomeFragment()
     {
 
@@ -43,7 +46,8 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //Connect();
+        Connect();
+        initUser();
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -122,74 +126,32 @@ public class HomeFragment extends Fragment {
     {
         connect = new RestClient<>();
         retroService = connect.getClient(RetroService.class);
-
-        /*retrofit = new Retrofit.Builder()
-                .baseUrl("http://49.142.64.32:3000")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        retroService = retrofit.create(RetroService.class);*/
-        getUser();
     }
-    public void getUser()
+    public void initUser()
     {
-      //  Call<Test2> call = retroService.getRespos("meansoup");
-       // Call<List<Test>> call = retroService.get();
-        Test t = new Test("멍윤","z");
-        Call<Test> call2 = retroService.post(t);
+        Call<User> call = retroService.getUser();
 
-       /* call.enqueue(new Callback<Test2>() {
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Test2> call, Response<Test2> response) {
-                Log.e("my_login","서버와의 통신 성공");
-                if(response.isSuccessful() && response.body() != null)
-                {
-                    String str = "response code : " + response.code() + "\nID : " +
-                            response.body().login + "\nURL : " + response.body().html_url;
-                    Log.e("my_login",str);
-
-                }
+            public void onResponse(Call<User> call, Response<User> response) {
+                user = new MyUser(response.body().getCard_key(),response.body().getGift_1(),response.body().getGift_2(),
+                        response.body().getGift_3(),response.body().getGift_4(),response.body().getGift_5());
             }
 
             @Override
-            public void onFailure(Call<Test2> call, Throwable t) {
-                Log.e("my_login","서버와의 통신 실패");
-            }
-        });*/
+            public void onFailure(Call<User> call, Throwable t) {
 
-        /*call.enqueue(new Callback<List<Test>>() {
-
-            @Override
-            public void onResponse(Call<List<Test>> call, Response<List<Test>> response) {
-                Log.i("my_login","서버와의 통신 성공");
-                List<Test> data = response.body();
-
-                if(response.isSuccessful() && response.body() != null)
-                {
-                    String str = ("ID : " +
-                            data.get(1)._id);
-                    Log.i("gotest",str);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Test>> call, Throwable t) {
-
-                Log.e("my_login","서버와의 통신 실패 : "+t.getMessage());
-            }
-        });*/
-
-        call2.enqueue(new Callback<Test>() {
-            @Override
-            public void onResponse(Call<Test> call, Response<Test> response) {
-                Log.i("my_login","서버와의 통신 성공");
-            }
-
-            @Override
-            public void onFailure(Call<Test> call, Throwable t) {
-                Log.e("my_login","서버와의 통신 실패 : "+t.getMessage());
             }
         });
+
+
+        SharedPreferences mPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = mPref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        prefEditor.putString("User",json);
+        prefEditor.commit();
     }
+
+
 }

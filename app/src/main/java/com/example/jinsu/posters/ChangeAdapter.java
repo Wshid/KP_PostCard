@@ -41,7 +41,7 @@ public class ChangeAdapter extends RecyclerView.Adapter<ChangeAdapter.ItemViewHo
         holder.txt_name.setText(myItems.get(position).getCh_txt_name());
         holder.txt_detail.setText(myItems.get(position).getCh_txt_detail());
         holder.txt_detail2.setText(myItems.get(position).getCh_txt_detail2());
-        holder.image_icon.setImageDrawable(myItems.get(position).getCh_drawable());
+        holder.image_icon.setImageResource(myItems.get(position).getCh_drawable());
         holder.check.setChecked(myItems.get(position).isCheked());
         holder.check.setTag(myItems.get(position));
         if(myItems.get(position).isCheked())

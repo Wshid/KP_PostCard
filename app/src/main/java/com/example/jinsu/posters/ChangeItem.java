@@ -1,7 +1,5 @@
 package com.example.jinsu.posters;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by jinsu on 2018-03-27.
  */
@@ -10,11 +8,11 @@ public class ChangeItem {
     private String ch_txt_name;
     private String ch_txt_detail;
     private String ch_txt_detail2;
-    private Drawable ch_drawable;
+    private int ch_drawable;
     private boolean isCheked;
     private String gift_key;
 
-    public ChangeItem(String name, String detail1, String detail2, Drawable drawable, boolean isCheked, String gift_key)
+    public ChangeItem(String name, String detail1, String detail2,int drawable, boolean isCheked, String gift_key)
     {
         this.ch_txt_name=name;
         this.ch_txt_detail=detail1;
@@ -39,7 +37,7 @@ public class ChangeItem {
         return gift_key;
     }
 
-    public void setCh_drawable(Drawable ch_drawable) {
+    public void setCh_drawable(int ch_drawable) {
         this.ch_drawable = ch_drawable;
     }
 
@@ -60,7 +58,7 @@ public class ChangeItem {
         return ch_txt_detail2;
     }
 
-    public Drawable getCh_drawable() {
+    public int getCh_drawable() {
         return ch_drawable;
     }
 

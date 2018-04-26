@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     >
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <TextView
         android:id="@+id/bank_book"
         android:layout_width="wrap_content"
@@ -71,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginTop="35dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="35dp"
         android:layout_below="@id/possible"
         android:gravity="center_vertical"
         android:text="금액" />
@@ -81,9 +87,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/money"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="40dp"
         android:layout_toRightOf="@id/money"
-        android:ems="10"
+        android:ems="9"
         android:hint="보내는 금액 입력"
         android:gravity="right"
         android:inputType="numberDecimal" />
@@ -96,6 +102,7 @@
         android:layout_toRightOf="@+id/send_money"
         android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
         android:text="원" />
 
     <Spinner
@@ -168,7 +175,7 @@
         android:inputType="textPersonName"
         android:gravity="center"
         android:layout_marginTop="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="45dp"
         android:hint="7자이내 입력"
         />
 
@@ -207,7 +214,7 @@
         android:text="취소"
         android:background="@drawable/btn_border"
         android:textColor="@color/white"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="22dp"
         />
     <Button
         android:id="@+id/send_button"
@@ -220,7 +227,7 @@
         android:background="@drawable/btn_border"
         android:textColor="@color/white"
         android:layout_marginLeft="70dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="22dp"
         />
 
 
@@ -232,6 +239,7 @@
         android:layout_marginBottom="230dp"
         android:background="?android:attr/listDivider"
         />
-
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
