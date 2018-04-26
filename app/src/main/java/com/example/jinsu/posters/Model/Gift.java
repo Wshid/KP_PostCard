@@ -2,15 +2,15 @@ package com.example.jinsu.posters.Model;
 
 public class Gift {
 
-    private String gitt_idx;
+    private String gift_idx;
     private String gift_title;
     private String gift_content;
     private String gift_category;
     private String gift_limit;
     private String gift_image;
 
-    public String getGitt_idx() {
-        return gitt_idx;
+    public String getGift_idx() {
+        return gift_idx;
     }
 
     public String getGift_title() {
@@ -33,9 +33,9 @@ public class Gift {
         return gift_image;
     }
 
-    public Gift(String gitt_idx, String gift_title, String gift_content, String gift_category, String gift_limit, String gift_image) {
+    public Gift(String gift_idx, String gift_title, String gift_content, String gift_category, String gift_limit, String gift_image) {
 
-        this.gitt_idx = gitt_idx;
+        this.gift_idx = gift_idx;
         this.gift_title = gift_title;
         this.gift_content = gift_content;
         this.gift_category = gift_category;

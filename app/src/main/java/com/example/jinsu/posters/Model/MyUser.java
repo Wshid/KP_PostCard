@@ -55,11 +55,11 @@ public class MyUser {
     }
     public void chGift_4(String key)
     {
-        gift_1 = key;
+        gift_4 = key;
     }
     public void chGift_5(String key)
     {
-        gift_1 = key;
+        gift_5 = key;
     }
 
 }

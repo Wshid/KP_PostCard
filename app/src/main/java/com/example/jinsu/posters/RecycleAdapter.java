@@ -36,7 +36,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ItemView
         holder.txt_name.setText(myItems.get(position).getTxt_name());
         holder.txt_detail.setText(myItems.get(position).getTxt_detail());
         holder.txt_detail2.setText(myItems.get(position).getTxt_detail2());
-        holder.image_icon.setImageDrawable(myItems.get(position).getDrawable());
+        holder.image_icon.setImageResource(myItems.get(position).getDrawable());
     }
 
 

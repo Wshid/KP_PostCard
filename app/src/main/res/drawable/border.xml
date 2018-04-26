@@ -12,7 +12,12 @@
             <solid android:color="#ffffff" />
         </shape>
     </item>
-
+    <shape xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+        <solid android:color="#d7d7d7" />
+        <corners android:radius="8dp"/>
+    </shape>
 
 
 </layer-list>
+

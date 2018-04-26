@@ -1,6 +1,7 @@
 package com.example.jinsu.posters.Data;
 
 import com.example.jinsu.posters.Model.Gift;
+import com.example.jinsu.posters.Model.MyUser;
 import com.example.jinsu.posters.Model.User;
 import com.example.jinsu.posters.Model.Test;
 import com.example.jinsu.posters.Model.Test2;
@@ -13,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetroService {
     // url : http://api.github.com/users/meansoup
@@ -22,6 +24,10 @@ public interface RetroService {
 
     @GET("/All_Gift")
     Call<ArrayList<Gift>> getGift();
+
+    //자신이 가지고 있는 혜택
+    @GET("/postCardKey")
+    Call<ArrayList<Gift>> getMyGift(@Query("card_key") String card_key);
 
     @GET("/user")
     Call<User> getUser();
@@ -37,4 +43,7 @@ public interface RetroService {
 
     @POST("/users/{KEY}")
     Call<User> postRespos(@Path("KEY") String id, @Body User user);
+
+    @POST("/updateGift")
+    Call<String> updateGift(@Body MyUser user);
 }

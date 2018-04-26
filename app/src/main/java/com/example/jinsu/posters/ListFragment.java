@@ -76,8 +76,20 @@ public class ListFragment extends Fragment {
                 "잔액 332,500 원",false));
         myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
                 "잔액 332,500 원",false));
-        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","입금 2,600 원",
                 "잔액 332,500 원",true));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
+        myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
+                "잔액 332,500 원",false));
         myList.add(new Listitem("2018.04.06 12시16분", "GS25 숭실대점","출금 2,600 원",
                 "잔액 332,500 원",false));
         adapter.notifyDataSetChanged();
