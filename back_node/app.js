@@ -5,8 +5,7 @@ var express = require('express')
 
 // Express의 미들웨어 불러오기
 var bodyParser = require('body-parser')
-    , cookieParser = require('cookie-parser')
-    ;
+    , cookieParser = require('cookie-parser');
 
 // 에러 핸들러 모듈 사용
 
@@ -65,52 +64,85 @@ app.get('/dashboard', (req, res)=>{
     res.render('dashboard.html');
 })
 
-router.route('/registration').post(function(req,res){
-    var user={};
 
-    console.log("body:"+req.body);
-    console.log("query:"+req.query.id);
-
-    user.gift_content = req.body.gift_content||req.query.gift_content;
-    console.log("userid : "+user.id);
-
-
-    // database.insertUser(user); // 데이터 삽입
-})
-
-/*app.get('/findAll',(req,res)=>{ // 몽고디비에 있는 데이터 모두 뽑아오기
-    database.findAll(app,res);
-    //
-});*/
-router.route('/showposttable').get((req,res)=>{
-    console.log('showtable');
-console.log(get_card_key);
-connection.query('SELECT b.gift_title,b.gift_content from post_card a, post_giftmeta b where (a.gift_1 = b.gift_idx and a.card_key="'+get_card_key+'") or (a.gift_2 = b.gift_idx and a.card_key="'+get_card_key+'")'
-    , function(err, rows) {
-        if(err) throw err;
-
-        console.log('The solution is: ', rows);
-        res.json(rows);
-    });
-})
 
 router.route('/insert')
 
 
-app.post('/postCardKey',(req,res)=>{
-    get_card_key = req.body.card_key || req.query.card_key;
-    console.log(get_card_key);
+app.get('/postCardKey',(req,res)=>{
+    getcard_key(req,res);
+
+})
+getcard_key = async(req,res)=>{ // async await에 대해서 조금 더 공부하기!!
+    var card_key = req.body.card_key || req.query.card_key;
+
+
+    print_gift(req,res,card_key,()=>{
+        console.log("하하");
+    });
+}
+function print_gift(req,res,card_key){
+    console.log("card_key: "+card_key);
+    connection.query('SELECT b.gift_idx,b.gift_title,b.gift_content,b.gift_category,b.gift_limit,b.gift_image from post_card a, post_giftmeta b ' +
+        'where (a.gift_1 = b.gift_idx and a.card_key="'+card_key+'") or ' +
+        '(a.gift_2 = b.gift_idx and a.card_key="'+card_key+'") or ' +
+        '(a.gift_3 = b.gift_idx and a.card_key="'+card_key+'") or ' +
+        '(a.gift_4 = b.gift_idx and a.card_key="'+card_key+'") or ' +
+        '(a.gift_5 = b.gift_idx and a.card_key="'+card_key+'")'
+        , function(err, rows) {
+            if(err) throw err;
+            console.log('The solution is: ', rows);
+            res.json(rows);
+            // return rows;
+        });
+
+}
+app.get('/All_Gift',(req,res)=>{ // 카드사가 가지고 있는 모든 혜택 보여주기
+    connection.query('select gift_idx,gift_title,gift_content,gift_category,gift_limit,gift_image from post_giftmeta where gift_content!=\'gift_content\'',(err,rows)=>{
+        if(err) throw err;
+        console.log(rows);
+        res.json(rows);
+    })
 })
 
 
-app.post('/updateUser',(req,res)=>{ // id를 입력하면 pw를 업데이트하는 방식
-    var user={};
-    user.id = req.body.id || req.query.id;
-    user.pw = req.body.pw || req.query.pw;
+app.post('/updateGift',(req,res)=>{ // giftkey값 3개를 받아와서 업데이트 하는 방식
 
-    database.updateUser(user); // 데이터 수정
+    update_giftkey(req,res);
+
 });
+update_giftkey = (req,res,callback)=>{
+    var card_key = req.body.card_key || req.query.card_key;
+    var gift_1 = req.body.gift_1 || req.query.gift_1;
+    var gift_2 = req.body.gift_2 || req.query.gift_2;
+    var gift_3 = req.body.gift_3 || req.query.gift_3;
+    var gift_4 = req.body.gift_4 || req.query.gift_4;
+    var gift_5 = req.body.gift_5 || req.query.gift_5;
+    // var sql = 'UPDATE post_card SET gift_1='+gift_1+' WHERE card_key =7';
+    console.log("cardkey : "+card_key);
+    connection.query('update post_card set gift_1 = '+gift_1+' where card_key = \''+card_key+'\''
+        ,(err,rows)=>{
+        if(err) throw err;
+        console.log('update완료1');
+        // res.send('update완료1');
+            connection.query('update post_card set gift_2 = '+gift_2+' where card_key = \''+card_key+'\''
+                ,function(err,rows){
+                    if(err) throw err;
+                    // console.log('The solution is ', rows);
+                    console.log('update완료2');
+                    connection.query('update post_card set gift_3 = '+gift_3+',gift_4='+gift_4+',gift_5='+gift_5+' where card_key = \''+card_key+'\''
+                        ,function(err,rows){
+                            if(err) throw err;
+                            // console.log('The solution is ', rows);
+                            console.log('update완료3');
+                        })
+                })
+        });
+
+}
+
+
 app.use('/',router);
 
-
+// connection.end();
 
