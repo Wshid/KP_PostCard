@@ -5,12 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,7 +63,6 @@ public class HomeFragment extends Fragment {
         binding.imageCard.setClipToOutline(true);
 
         binding.setHome(this);
-
         //setRecyclerView();
         return binding.getRoot();
 
@@ -76,20 +72,20 @@ public class HomeFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
-        Log.d("my_home","onResume");
+        /*Log.d("my_home","onResume");
         try {
             String path = Environment.getExternalStorageDirectory() + "/card.png";
             if (path != null) {
                 Bitmap bit = BitmapFactory.decodeFile(path);
                 binding.imageCard.setImageBitmap(bit);
             }
-        }
+
         catch (Exception e)
         {
             e.printStackTrace();
         }
         initUser();
-        getGift();
+        getGift();*/
 
 
     }

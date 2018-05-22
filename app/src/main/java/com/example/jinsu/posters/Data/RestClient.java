@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient<T> {
     private T service;
-    private String baseUrl = "http://49.142.11.28:3000/";
+    private String baseUrl = "http://192.168.0.79:8181/";
 
     public T getClient(Class<? extends T> type)
     {

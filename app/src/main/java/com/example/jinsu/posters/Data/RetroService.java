@@ -25,6 +25,8 @@ public interface RetroService {
     @GET("/All_Gift")
     Call<ArrayList<Gift>> getGift();
 
+
+
     //자신이 가지고 있는 혜택
     @GET("/postCardKey")
     Call<ArrayList<Gift>> getMyGift(@Query("card_key") String card_key);
