@@ -1,4 +1,4 @@
-package com.example.jinsu.posters;
+package com.example.jinsu.posters.Model;
 
 public class User {
     String card_name;
@@ -6,6 +6,31 @@ public class User {
     String card_key;
     String card_num;
     String card_balance;
+    String gift_1;
+    String gift_2;
+    String gift_3;
+    String gift_4;
+    String gift_5;
+
+    public String getGift_1() {
+        return gift_1;
+    }
+
+    public String getGift_2() {
+        return gift_2;
+    }
+
+    public String getGift_3() {
+        return gift_3;
+    }
+
+    public String getGift_4() {
+        return gift_4;
+    }
+
+    public String getGift_5() {
+        return gift_5;
+    }
 
     public String getCard_name() {
         return card_name;

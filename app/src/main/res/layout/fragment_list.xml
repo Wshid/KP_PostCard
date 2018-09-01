@@ -17,15 +17,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/total_money"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="true"
+            android:layout_margin="4dp">
+        <TextView
+            android:id="@+id/total_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="26sp"
-            android:text="59,600 원"
-            android:layout_margin="4dp"
+            android:text="잔액"
             android:textStyle="bold"
             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:textSize="18sp"
+                android:text="332,500원"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

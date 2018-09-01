@@ -21,17 +21,18 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private ViewPager page;
     private PageAdapter adapter;
-
     private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
-
-//접근 거절 상태일 경우
+        //권한 획득
+        //접근 거절 상태일 경우
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED  || ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
             //사용자가 이전에 거절한 이력이 있는 경우
@@ -43,14 +44,15 @@ public class MainActivity extends AppCompatActivity {
             else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(MainActivity.this,
-                        new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        0);
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
 
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
         }
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setMain(this);
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         //binding.page.setAdapter(new PageAdapter(getSupportFragmentManager()));
         binding.page.setAdapter(adapter);
 
-        binding.page.setCurrentItem(0);
+
+//        binding.page.setCurrentItem(0);
 
         binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+
                 switch (position)
                 {
                     case 0:
@@ -124,5 +128,12 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationViewHelper.disableShiftMode(binding.navigation);
     }
+
+
+
+
+
+
+
 
 }

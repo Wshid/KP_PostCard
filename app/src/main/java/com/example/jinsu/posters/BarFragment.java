@@ -1,5 +1,6 @@
 package com.example.jinsu.posters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import android.widget.LinearLayout;
  */
 
 public class BarFragment extends Fragment {
+
+    private boolean hint = false;
+
     public BarFragment()
     {
 
@@ -22,7 +26,8 @@ public class BarFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Log.d("my_bar","bar create@@@@@");
+        Log.d("my_bar","onCreate()");
+
 
 
     }
@@ -31,25 +36,51 @@ public class BarFragment extends Fragment {
     {
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.fragment_bar, container, false);
 
-        Log.d("my_bar","bar create view@@");
+        Log.d("my_bar","onCreateView()");
+        if(hint)
+        {
+            Log.d("my_bar","hint");
+            startActivity(new Intent(getContext(), ScanActivity.class));
+        }
+
         return layout;
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        Log.d("my_bar","onResume()");
+
+    }
+
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser)
     {
         super.setUserVisibleHint(isVisibleToUser);
+        Log.d("my_bar","onsetUserVisibleHint()");
         //화면이 실제로 보일 떄
         if(isVisibleToUser)
         {
-                startActivity(new Intent(super.getActivity(), ScanActivity.class));
-
+            hint = true;
+            Log.d("my_bar","실제로 보일 때");
+           if(getActivity() != null)
+           {
+               startActivity(new Intent(getContext(), ScanActivity.class));
+           }
         }
-        else
-        {
 
-        }
     }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        Log.d("my_bar","onAttach()");
+        super.onAttach(activity);
+    }
+
 
 
 }
